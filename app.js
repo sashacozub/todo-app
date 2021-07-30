@@ -2,6 +2,7 @@
 const form = document.querySelector('.todo');
 const input = document.querySelector('input');
 const taskList = document.querySelector('ul');
+const submitButton = document.querySelector('.submit');
 
 // Add task to the list on submit
 form.addEventListener('submit', e => {
@@ -11,20 +12,18 @@ form.addEventListener('submit', e => {
     }
 
     createTask(input.value);
-    input.value = '';
+    form.reset();
 })
 
 
 
 const createTask = (task) => {
     const newTask = document.createElement('li');
-    newTask.classList.add('test');
+    task.charAt(0).toUpperCase();
     newTask.innerHTML = `
         <p>${task}</p>
-        <div>
-            <button class="add">Check</button>
-            <button class="remove">Delete</button>
-        </div>
+        <i class="fas fa-check-square button check"></i>
+        <i class="fas fa-trash-alt button remove"></i>
     `;
 
     taskList.appendChild(newTask)
@@ -32,7 +31,19 @@ const createTask = (task) => {
 
 
 taskList.addEventListener('click', (e) => {
-    if (e.target.className === 'remove') {
-        e.target.parentNode.parentNode.remove()
+    if (e.target.classList.contains('remove')) {
+        e.target.parentNode.remove();
+    }
+
+    if (e.target.classList.contains('check')) {
+        console.log('done')
     }
 })
+
+submitButton.addEventListener('click', () => {
+    if (input.value === '') {
+        return;
+    }
+    
+    createTask(input.value);
+});

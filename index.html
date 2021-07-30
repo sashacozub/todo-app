@@ -4,18 +4,32 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.3/css/all.css" integrity="sha384-SZXxX4whJ79/gErwcOYf+zWLeJdY/qpuqC4cAa9rOGUstPomtqpuNWT9wdPEn2fk" crossorigin="anonymous">
     <link rel="stylesheet" href="./style.css" type="text/css">
     <script src="./app.js" type="text/javascript" defer async></script>
     <title>ToDo App</title>
 </head>
 <body>
     <div class="main-container">
-        <h1>ToDo App</h1>
-        <form class="todo">
-            <input type="text">
-            <button type="submit">Add</button>
-        </form>
-        <ul></ul>
+        <div class="form-container">
+            <h1>ToDo App</h1>
+            <form class="todo">
+                <input type="text" placeholder="Enter a ToDo task">
+                <i class="fas fa-plus-square fa-2x submit"></i>
+            </form>
+        </div>
+        <ul>
+            <li>
+                <p>TEXT</p>
+                <i class="fas fa-check-square button check"></i>
+                <i class="fas fa-trash-alt button remove"></i>
+            </li>
+            <li class="done">
+                <p>TEXT - DONE</p>
+                <i class="fas fa-check-square button check"></i>
+                <i class="fas fa-trash-alt button remove"></i>
+            </li>
+        </ul>
     </div>
 </body>
 </html>

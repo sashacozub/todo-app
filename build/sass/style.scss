@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Gowun+Batang&family=Style+Script&display=swap');
+
 *,
 *::before,
 *::after {
@@ -9,23 +11,47 @@
 body {
     min-height: 100vh;
     position: relative;
+    font-family: 'Gowun Batang', serif;
 }
 
 ul {
     width: 100%;
+    margin-bottom: 10%;
 }
 
 li {
-    position: relative;
     list-style: none;
-    background-color: darkcyan;
+    border: 1px solid #7922a1;
     width: 100%;
     height: 40px;
-    margin: 5px 0px;
-    padding: 10px;
+    margin: 10px 0px;
+    padding-left: 20px;
     display: flex;
     align-items: center;
     font-size: 1.5rem;
+    box-shadow: 3px 3px 0px #7922a1;
+    text-transform: capitalize;
+    
+    p {
+        flex: 1;
+    }
+
+    .button {
+        width: 40px;
+        height: 40px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+    }
+
+    .fa-check-square {
+        color: #00bb1f;
+    }
+
+    .fa-trash-alt {
+        color: rgb(255, 72, 72);
+    }
 }
 
 .main-container {
@@ -33,54 +59,62 @@ li {
     top: 10%;
     left: 50%;
     transform: translateX(-50%);
-    background-color: coral;
     width: 40%;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
 
+
     h1 {
+        font-family: 'Style Script', cursive;
+        width: 100%;
+        text-align: center;
         font-size: 3rem;
         padding: 20px;
+        background-color: #7922a1;
+        color: white;
     }
 }
 
-.todo {
-    background-color: cornflowerblue;
-    position: relative;
+.form-container {
     width: 100%;
-    height: 50px;
+    box-shadow: 3px 3px 0px #7922a1;
 
-    input {
+    .todo {
+        background-color: cornflowerblue;
+        position: relative;
         width: 100%;
-        height: 100%;
-        padding: 20px;
-        font-size: 1.7rem;
-    }
-
-    button {
-        position: absolute;
-        right: 0;
-        top: 50%;
-        transform: translateY(-50%);
-        width: 50px;
         height: 50px;
+    
+        input {
+            width: 100%;
+            height: 100%;
+            padding: 20px;
+            font-size: 1.7rem;
+            font-family: 'Gowun Batang', serif;
+            outline: none;
+        }
+    
+        .submit {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: absolute;
+            right: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 50px;
+            height: 50px;
+            color: rgb(121, 34, 161);
+            transition: all 200ms ease;
+            transform-origin: center;
+            cursor: pointer;
+
+            &:hover {
+                transform:rotateZ(180deg) translateY(50%);
+            }
+        }
     }
 }
 
-
-
-.test {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    height: 40px;
-    background-color: green;
-    padding-left: 10px;
-
-    div button {
-        width: 40px;
-        height: 40px;
-    }
-}
