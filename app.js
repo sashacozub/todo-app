@@ -12,7 +12,6 @@ form.addEventListener('submit', e => {
     }
 
     createTask(input.value);
-    form.reset();
 })
 
 
@@ -26,7 +25,8 @@ const createTask = (task) => {
         <i class="fas fa-trash-alt button remove"></i>
     `;
 
-    taskList.appendChild(newTask)
+    taskList.appendChild(newTask);
+    form.reset();
 }
 
 
