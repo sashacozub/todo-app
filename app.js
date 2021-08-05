@@ -76,24 +76,22 @@ tasksList.addEventListener('click', e => {
         })
     }
     /********* PERMA-DELETE *********/
-    // if (button.classList.contains('remove')) {
-    //     button.parentNode.classList.add('removed');
-    //     button.parentNode.addEventListener('transitionend', () => {
-    //         button.parentNode.remove();
-    //         saveToLocalStorage(tasksList.innerHTML);
-    //     })
-    // }
-
-    /********* TEMP-DELETE *********/
     if (button.classList.contains('remove')) {
         button.parentNode.classList.add('removed');
         button.parentNode.addEventListener('transitionend', () => {
-            button.parentNode.style.display = 'none';
+            button.parentNode.remove();
             saveToLocalStorage(tasksList.innerHTML);
         })
     }
 
-    
+    /********* TEMP-DELETE *********/
+    // if (button.classList.contains('remove')) {
+    //     button.parentNode.classList.add('removed');
+    //     button.parentNode.addEventListener('transitionend', () => {
+    //         button.parentNode.style.display = 'none';
+    //         saveToLocalStorage(tasksList.innerHTML);
+    //     })
+    // }    
 })
 
 const saveToLocalStorage = list => {
