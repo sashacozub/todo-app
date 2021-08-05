@@ -1,4 +1,4 @@
-# Vanilla JavaScript ToDo App #
+# Vanilla JavaScript To-Do App #
 ![Project preview](https://i.imgur.com/ggxKqYE.png)
 
 ---
