@@ -143,6 +143,31 @@ li {
     }
 }
 
+.filter-tabs {
+    width: 100%;
+    height: 40px;
+    display: flex;
+    box-shadow: 3px 3px 0px var(--main-color);
+
+    button {
+        flex: 1;
+        font-family: 'Gowun Batang', serif;
+        font-size: 1.3rem;
+        cursor: pointer;
+        background-color: rgba(255, 255, 255, 0.473);
+        border: 1px solid var(--main-color);
+        transition: all 200ms ease;
+
+        &:hover {
+            background-color: rgb(255, 255, 255);
+        }
+    }
+
+    // Highlight the active tab
+    .active-tab {
+        background-color: rgb(255, 255, 255);
+    }
+}
 
 // Special class for only text to get a strikethrough
 .text-check {
@@ -176,4 +201,12 @@ li {
             padding: 40px;
         }
     }
+
+    .filter-tabs {
+        button {
+            font-size: 1rem;
+        }
+    }
 }
+
+
