@@ -53,7 +53,12 @@ const createTask = task => {
     newTask.appendChild(buttonRemove);
     tasksList.appendChild(newTask);
 
-    // saveToLocalStorage(tasksList.innerHTML);
+    // This makes the task smoothly appear straight after added
+    setTimeout(() => {
+        newTask.classList.add('task-appear');
+        saveToLocalStorage(tasksList.innerHTML);
+    }, 0)
+
     form.reset();
 }
 
@@ -67,35 +72,34 @@ tasksList.addEventListener('click', e => {
         button.parentNode.classList.toggle('checked');
         button.previousSibling.classList.toggle('text-check');
         button.parentNode.addEventListener('transitionend', () => {
-            // saveToLocalStorage(tasksList.innerHTML);
+            saveToLocalStorage(tasksList.innerHTML);
         })
     }
-
-    if (button.classList.contains('remove')) {
-        button.parentNode.classList.add('removed');
-        button.parentNode.addEventListener('transitionend', () => {
-            button.parentNode.remove();
-            // saveToLocalStorage(tasksList.innerHTML);
-        })
-    }
-
+    /********* PERMA-DELETE *********/
     // if (button.classList.contains('remove')) {
     //     button.parentNode.classList.add('removed');
     //     button.parentNode.addEventListener('transitionend', () => {
-    //         button.parentNode.style.display = 'none';
+    //         button.parentNode.remove();
     //         saveToLocalStorage(tasksList.innerHTML);
     //     })
     // }
 
+    /********* TEMP-DELETE *********/
+    if (button.classList.contains('remove')) {
+        button.parentNode.classList.add('removed');
+        button.parentNode.addEventListener('transitionend', () => {
+            button.parentNode.style.display = 'none';
+            saveToLocalStorage(tasksList.innerHTML);
+        })
+    }
+
     
 })
 
-// const saveToLocalStorage = list => {
-//     localStorage.setItem('saved-todo', list);
-// }
+const saveToLocalStorage = list => {
+    localStorage.setItem('saved-todo', list);
+}
 
-// window.addEventListener('load', () => {
-//     tasksList.innerHTML = localStorage.getItem('saved-todo');
-// })
-
-
+window.addEventListener('load', () => {
+    tasksList.innerHTML = localStorage.getItem('saved-todo');
+})
