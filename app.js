@@ -3,8 +3,22 @@ const form = document.querySelector('.todo');
 const input = document.querySelector('input');
 const tasksList = document.querySelector('ul');
 const submitButton = document.querySelector('.submit');
+const filterTabs = document.querySelector('.filter-tabs');
 
-// Add task to the list on submit
+// Function that saves the data to local storage for later retrieval
+const saveToLocalStorage = list => {
+    localStorage.setItem('saved-todo', list);
+}
+
+// Retrieve the list from local storage and show all items on page load
+window.addEventListener('load', () => {
+    tasksList.innerHTML = localStorage.getItem('saved-todo');
+    tasksList.childNodes.forEach(node => {
+        node.style.display = 'flex';
+    })
+})
+
+// Add task to the list on submit activated with keyboard
 form.addEventListener('submit', e => {
     e.preventDefault();
     if (input.value.trim() === '') {
@@ -13,7 +27,7 @@ form.addEventListener('submit', e => {
     createTask(input.value);
 })
 
-// Add task to the list when submit button is clicked
+// Add task to the list when submit ("+") button is clicked
 submitButton.addEventListener('click', () => {
     if (input.value.trim() === '') {
         return;
@@ -57,13 +71,13 @@ const createTask = task => {
     setTimeout(() => {
         newTask.classList.add('task-appear');
         saveToLocalStorage(tasksList.innerHTML);
-    }, 0)
+    }, 0);
 
     form.reset();
 }
 
 
-// Check item as done or remove depending on which button was clicked
+// Tag item as "done" or "remove" depending on which button was clicked
 tasksList.addEventListener('click', e => {
     // Grab the actual button and not the icon
     const button = e.target.parentNode;
@@ -75,29 +89,65 @@ tasksList.addEventListener('click', e => {
             saveToLocalStorage(tasksList.innerHTML);
         })
     }
-    /********* PERMA-DELETE *********/
+
     if (button.classList.contains('remove')) {
         button.parentNode.classList.add('removed');
         button.parentNode.addEventListener('transitionend', () => {
             button.parentNode.remove();
             saveToLocalStorage(tasksList.innerHTML);
         })
-    }
-
-    /********* TEMP-DELETE *********/
-    // if (button.classList.contains('remove')) {
-    //     button.parentNode.classList.add('removed');
-    //     button.parentNode.addEventListener('transitionend', () => {
-    //         button.parentNode.style.display = 'none';
-    //         saveToLocalStorage(tasksList.innerHTML);
-    //     })
-    // }    
+    }   
 })
 
-const saveToLocalStorage = list => {
-    localStorage.setItem('saved-todo', list);
+
+// Filter To-Do items depending on which filter is used
+filterTabs.addEventListener('click', e => {
+    switch (e.target.id) {
+        case 'tab-all':
+            showAllItems();
+            break;
+        case 'tab-completed':
+            showCompletedItems();
+            break;
+        case 'tab-incompleted':
+            showIncompletedItems();
+            break;
+        default:
+            showAllItems();
+            break;
+    }
+})
+
+const showAllItems = () => {
+    tasksList.childNodes.forEach(node => {
+        node.style.display = 'flex';
+    });
 }
 
-window.addEventListener('load', () => {
-    tasksList.innerHTML = localStorage.getItem('saved-todo');
+const showCompletedItems = () => {
+    tasksList.childNodes.forEach(node => {
+        node.style.display = 'none';
+        if (node.classList.contains('checked')) {
+            node.style.display = 'flex';
+        }
+    })
+}
+
+const showIncompletedItems = () => {
+    tasksList.childNodes.forEach(node => {
+        node.style.display = 'none';
+        if (!node.classList.contains('checked')) {
+            node.style.display = 'flex';
+        }
+    })
+}
+
+// Change the color of active tab
+filterTabs.addEventListener('click', e => {
+    filterTabs.childNodes.forEach(tab => {
+        if (tab.nodeType !== 3) {
+            tab.classList.remove('active-tab');
+        }
+        e.target.classList.add('active-tab');
+    })
 })
