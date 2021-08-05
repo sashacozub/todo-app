@@ -96,42 +96,58 @@ tasksList.addEventListener('click', e => {
             button.parentNode.remove();
             saveToLocalStorage(tasksList.innerHTML);
         })
-    }
-
-    /********* TEMP-DELETE *********/
-    // if (button.classList.contains('remove')) {
-    //     button.parentNode.classList.add('removed');
-    //     button.parentNode.addEventListener('transitionend', () => {
-    //         button.parentNode.style.display = 'none';
-    //         saveToLocalStorage(tasksList.innerHTML);
-    //     })
-    // }    
+    }   
 })
 
 
 // Filter To-Do items depending on which filter is used
 filterTabs.addEventListener('click', e => {
-    if (e.target.id === 'tab-all') {
-        tasksList.childNodes.forEach(node => {
+    switch (e.target.id) {
+        case 'tab-all':
+            showAllItems();
+            break;
+        case 'tab-completed':
+            showCompletedItems();
+            break;
+        case 'tab-incompleted':
+            showIncompletedItems();
+            break;
+        default:
+            showAllItems();
+            break;
+    }
+})
+
+const showAllItems = () => {
+    tasksList.childNodes.forEach(node => {
+        node.style.display = 'flex';
+    });
+}
+
+const showCompletedItems = () => {
+    tasksList.childNodes.forEach(node => {
+        node.style.display = 'none';
+        if (node.classList.contains('checked')) {
             node.style.display = 'flex';
-        })
-    }
+        }
+    })
+}
 
-    if (e.target.id === 'tab-completed') {
-        tasksList.childNodes.forEach(node => {
-            node.style.display = 'none';
-            if (node.classList.contains('checked')) {
-                node.style.display = 'flex';
-            }
-        })
-    }
+const showIncompletedItems = () => {
+    tasksList.childNodes.forEach(node => {
+        node.style.display = 'none';
+        if (!node.classList.contains('checked')) {
+            node.style.display = 'flex';
+        }
+    })
+}
 
-    if (e.target.id === 'tab-incompleted') {
-        tasksList.childNodes.forEach(node => {
-            node.style.display = 'none';
-            if (!node.classList.contains('checked')) {
-                node.style.display = 'flex';
-            }
-        })
-    }
+// Change the color of active tab
+filterTabs.addEventListener('click', e => {
+    filterTabs.childNodes.forEach(tab => {
+        if (tab.nodeType !== 3) {
+            tab.classList.remove('active-tab');
+        }
+        e.target.classList.add('active-tab');
+    })
 })
