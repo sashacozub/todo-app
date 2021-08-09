@@ -50,15 +50,16 @@ const deleteConfirmation = (task) => {
                 task.parentNode.remove();
                 saveToLocalStorage(tasksList.innerHTML);
             });
+            window.removeEventListener('keyup', keyboardEvent);
             body.removeChild(confirmationContainer);
         } else if (e.target.className === 'cancel-btn') {
+            window.removeEventListener('keyup', keyboardEvent);
             body.removeChild(confirmationContainer);
         }
     })
 
     // Confirm if "enter" is pressed and cancel if "Escape" is pressed
     const keyboardEvent = e => {
-        console.log(e);
         if (e.code === 'Enter') {
             task.parentNode.classList.add('removed');
             task.parentNode.addEventListener('transitionend', () => {
