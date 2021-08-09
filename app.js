@@ -5,6 +5,80 @@ const tasksList = document.querySelector('ul');
 const submitButton = document.querySelector('.submit');
 const filterTabs = document.querySelector('.filter-tabs');
 
+
+// Create a box that get confirmation of task deletion
+const deleteConfirmation = (task) => {
+    // Create all the elements for the box and assign classes
+    const body = document.querySelector('body');
+
+    const confirmationContainer = document.createElement('div');
+    confirmationContainer.classList.add('confirmation-box');
+    
+    const confirmationMessageBox = document.createElement('div');
+    confirmationMessageBox.classList.add('delete-confirmation');
+
+    const h2 = document.createElement('h2');
+    h2.innerText = 'Are you sure you want to delete this task?';
+
+    const h3 = document.createElement('h3');
+    h3.innerText = 'It will be gone forever!';
+
+    const buttonsContainer = document.createElement('div');
+    buttonsContainer.classList.add('confirmation-btns');
+
+    const deleteButton = document.createElement('button');
+    deleteButton.classList.add('delete-btn');
+    deleteButton.innerText = 'Delete';
+
+    const cancelButton = document.createElement('button');
+    cancelButton.classList.add('cancel-btn');
+    cancelButton.innerText = 'Cancel';
+
+    buttonsContainer.appendChild(deleteButton);
+    buttonsContainer.appendChild(cancelButton);
+    confirmationMessageBox.appendChild(h2);
+    confirmationMessageBox.appendChild(h3);
+    confirmationMessageBox.appendChild(buttonsContainer);
+    confirmationContainer.appendChild(confirmationMessageBox);
+    body.appendChild(confirmationContainer);
+
+    // Remove task if confirmed, or cancel deletion and close window
+    buttonsContainer.addEventListener('click', e => {
+        if (e.target.className === 'delete-btn') {
+            task.parentNode.classList.add('removed');
+            task.parentNode.addEventListener('transitionend', () => {
+                task.parentNode.remove();
+                saveToLocalStorage(tasksList.innerHTML);
+            });
+            body.removeChild(confirmationContainer);
+        } else if (e.target.className === 'cancel-btn') {
+            body.removeChild(confirmationContainer);
+        }
+    })
+
+    // Confirm if "enter" is pressed and cancel if "Escape" is pressed
+    const keyboardEvent = e => {
+        console.log(e);
+        if (e.code === 'Enter') {
+            task.parentNode.classList.add('removed');
+            task.parentNode.addEventListener('transitionend', () => {
+                task.parentNode.remove();
+                saveToLocalStorage(tasksList.innerHTML);
+            });
+            window.removeEventListener('keyup', keyboardEvent);
+            body.removeChild(confirmationContainer);
+        } else if (e.code === 'Escape') {
+            window.removeEventListener('keyup', keyboardEvent);
+            body.removeChild(confirmationContainer);
+        }
+    }
+
+    // Create event listener with call to function that will be canceled when either "delete" of "cancel" will be pressed
+    window.addEventListener('keyup', keyboardEvent);
+}
+
+
+
 // Function that saves the data to local storage for later retrieval
 const saveToLocalStorage = list => {
     localStorage.setItem('saved-todo', list);
@@ -91,11 +165,7 @@ tasksList.addEventListener('click', e => {
     }
 
     if (button.classList.contains('remove')) {
-        button.parentNode.classList.add('removed');
-        button.parentNode.addEventListener('transitionend', () => {
-            button.parentNode.remove();
-            saveToLocalStorage(tasksList.innerHTML);
-        })
+        deleteConfirmation(button);
     }   
 })
 

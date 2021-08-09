@@ -194,7 +194,7 @@ li {
 
 // The box that appears to confirm the task deletion
 .confirmation-box {
-    position: absolute;
+    position: fixed;
     top: 0;
     left: 0;
     width: 100%;
@@ -214,6 +214,7 @@ li {
         justify-content: center;
         align-items: center;
         gap: 10px;
+        text-align: center;
         box-shadow: 3px 3px 0px rgb(0, 0, 0);
     
         .confirmation-btns {
@@ -268,5 +269,15 @@ li {
         }
     }
 }
+
+@media screen and (max-width: 550px) {
+    .confirmation-box {
+        .delete-confirmation {
+            width: 100%;
+            height: 200px;
+        }
+    }
+}
+
 
 
