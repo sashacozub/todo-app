@@ -192,6 +192,66 @@ li {
 }
 
 
+// The box that appears to confirm the task deletion
+.confirmation-box {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.5);
+
+    .delete-confirmation {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 500px;
+        height: 150px;
+        background-color: rgb(255, 255, 255);
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 10px;
+        box-shadow: 3px 3px 0px rgb(0, 0, 0);
+    
+        .confirmation-btns {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+    
+            button {
+                width: 100px;
+                height: 40px;
+                border: none;
+                font-family: 'Gowun Batang', serif;
+                font-size: 1.1rem;
+                box-shadow: 3px 3px 0px rgb(0, 0, 0);
+                cursor: pointer;
+                transition: all 100ms ease;
+
+                &:active {
+                    transform: translate(3px, 3px);
+                    box-shadow: none;
+                }
+            }
+    
+            .delete-btn {
+                background-color: rgb(255, 72, 72);
+            }
+    
+            .cancel-btn {
+                background-color: rgb(0, 187, 31);
+            }
+        }
+    } 
+}
+
+
+
+
 @media screen and (max-width: 768px) {
     .main-container {
         width: 100%;
