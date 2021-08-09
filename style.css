@@ -184,6 +184,62 @@ li {
   opacity: 0;
 }
 
+.confirmation-box {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.confirmation-box .delete-confirmation {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 500px;
+  height: 150px;
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  box-shadow: 3px 3px 0px black;
+}
+
+.confirmation-box .delete-confirmation .confirmation-btns {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.confirmation-box .delete-confirmation .confirmation-btns button {
+  width: 100px;
+  height: 40px;
+  border: none;
+  font-family: 'Gowun Batang', serif;
+  font-size: 1.1rem;
+  box-shadow: 3px 3px 0px black;
+  cursor: pointer;
+  transition: all 100ms ease;
+}
+
+.confirmation-box .delete-confirmation .confirmation-btns button:active {
+  transform: translate(3px, 3px);
+  box-shadow: none;
+}
+
+.confirmation-box .delete-confirmation .confirmation-btns .delete-btn {
+  background-color: #ff4848;
+}
+
+.confirmation-box .delete-confirmation .confirmation-btns .cancel-btn {
+  background-color: #00bb1f;
+}
+
 @media screen and (max-width: 768px) {
   .main-container {
     width: 100%;
